@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "gfyredirect",
+    "version": "1.0",
+
+    "description": "Redirects all gfycat links to the actual gif or video file",
+
+    "icons": {
+        "48": "icons/nogfy48.png",
+        "96": "icons/nogfy96.png"
+    },
+
+    "permissions": ["*://*.gfycat.com/*"],
+
+    "content_scripts": [
+		{
+			"matches": ["*://*.gfycat.com/*"],
+            "css": ["removeNotGIF.css"]
+		}
+    ]
+}
+
