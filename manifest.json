@@ -13,10 +13,16 @@
     "permissions": ["*://*.gfycat.com/*"],
 
     "content_scripts": [
+        {
+            "matches": ["*://*.gfycat.com/*"],
+            "css": ["hideAll.css"],
+            "run_at": "document_start"
+        },
 		{
 			"matches": ["*://*.gfycat.com/*"],
             "js": ["removeGfy.js"],
-            "css": ["centerVid.css"]
+            "css": ["centerVid.css"],
+            "run_at": "document_end"
 		}
     ]
 }
