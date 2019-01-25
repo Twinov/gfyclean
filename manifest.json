@@ -15,7 +15,8 @@
     "content_scripts": [
 		{
 			"matches": ["*://*.gfycat.com/*"],
-            "css": ["removeNotGIF.css"]
+            "js": ["removeGfy.js"],
+            "css": ["centerVid.css"]
 		}
     ]
 }
