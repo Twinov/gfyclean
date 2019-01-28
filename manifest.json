@@ -7,11 +7,11 @@
 
     "description": "Cleans up gfycat, removing everything but the gif itself when a gfycat page is viewed.",
 
-    "browser_specific_setting": {
+    "browser_specific_settings": {
         "gecko": {
-            "id": "twilight@cock.li"
+            "id": "gfyclean@cock.li"
         }
-    }
+    },
 
     "icons": {
         "16": "icons/gfyclean16.png",
