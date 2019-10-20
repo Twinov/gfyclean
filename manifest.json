@@ -53,6 +53,7 @@
         {
             "matches": ["*://*.imgur.com/*"],
             "js": ["removeImgur.js"],
+            "css": ["centerVid.css"],
             "run_at": "document_end"
         }
     ]
