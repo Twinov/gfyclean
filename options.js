@@ -16,7 +16,7 @@ function saveOptions() {
 
 function restoreOptions() {
   browser.storage.local.get({
-    imgur: true
+    imgur: false
   }, function(items) {
     document.getElementById("imgur").checked = items.imgur
   });
