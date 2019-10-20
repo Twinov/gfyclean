@@ -3,25 +3,35 @@
 window.addEventListener ("load", gfyclean(), false)
 
 function gfyclean() {
-    if (window.location.href != "https://gfycat.com/"){
+    if (window.location.href != "https://gfycat.com/" && window.location.href != "gfycat.com"){
         try {
-            var vid = document.getElementsByClassName("video media")[0];
+            var vid;
+            vid = document.getElementsByClassName("video media")[0];
             document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
+            document.body.style.visibility = "visible";
         }
         catch (TypeError) {
-            setTimeout(function() {
+            //failed the first time, so keep retrying until the site is loaded.
+            var i;
+            for (i = 0; i < 100; i++) {
+                if (i == 99) {
+                    //script failed after 10 seconds; just show the normal page
+                    document.body.style.visibility = "visible";
+                }
                 try {
-                    var vid = document.getElementsByClassName("video media")[0];
-                    document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
-                }
-                catch (TypeError) {
                     setTimeout(function() {
-                        var vid = document.getElementsByClassName("video media")[0];
-                        console.log(vid)
+                        var vid;
+                        vid = document.getElementsByClassName("video media")[0];
                         document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
-                    }, 6000);
+                        document.body.style.visibility = "visible";
+                        i = 10;
+                    }, 100);
+                } catch (TypeError) {
+                    continue;
                 }
-            }, 6000);
+            }
         }
+    } else {
+        document.body.style.visibility = "visible";
     }
 };

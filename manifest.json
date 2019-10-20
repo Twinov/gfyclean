@@ -1,13 +1,13 @@
 {
     "manifest_version": 2,
     "name": "gfyclean",
-    "version": "2.0",
+    "version": "2.2",
 
     "homepage_url": "https://github.com/Twinov/gfyclean",
 
     "description": "Cleans up gfycat, removing everything but the gif itself when a gfycat page is viewed.",
 
-    "browser_specific_settings": {
+    "applications": {
         "gecko": {
             "id": "gfyclean@cock.email"
         }
@@ -21,7 +21,17 @@
         "128": "icons/gfyclean128.png"
     },
 
-    "permissions": ["*://*.gfycat.com/*"],
+    "options_ui": {
+        "page": "options.html",
+        "browser_style": true,
+        "open_in_tab": false
+    },
+
+    "permissions": [
+        "*://*.gfycat.com/*", 
+        "*://*.imgur.com/*",
+        "storage"
+    ],
     
     "content_scripts": [
         {
@@ -30,11 +40,21 @@
             "run_at": "document_start"
         },
 		{
-			"matches": ["*://*.gfycat.com/*"],
+            "matches": ["*://*.gfycat.com/*"],
             "js": ["removeGfy.js"],
             "css": ["centerVid.css"],
             "run_at": "document_end"
-		}
+        },
+        {
+            "matches": ["*://*.imgur.com/*"],
+            "css": ["hideAll.css"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["*://*.imgur.com/*"],
+            "js": ["removeImgur.js"],
+            "run_at": "document_end"
+        }
     ]
 }
 
