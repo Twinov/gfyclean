@@ -1,6 +1,9 @@
 function removeImgur() {
     if (window.location.href.indexOf("gallery") == -1 && window.location.href.indexOf("i.imgur.com") == -1) {
         document.body.style.visibility = "visible";
+    } else if (window.location.href.indexOf("m.imgur.com") != -1) {
+        //mobile support not yet implemented
+        document.body.style.visibility = "visible";
     } else {
         imgur = browser.storage.local.get("imgur");
         imgur.then(function(result) {

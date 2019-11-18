@@ -5,33 +5,65 @@ window.addEventListener ("load", gfyclean(), false)
 function gfyclean() {
     if (window.location.href != "https://gfycat.com/" && window.location.href != "gfycat.com"){
         try {
-            var vid;
-            vid = document.getElementsByClassName("video media")[0];
-            document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
-            document.body.style.visibility = "visible";
+            replacegfy();
         }
         catch (TypeError) {
             //failed the first time, so keep retrying until the site is loaded.
-            var i;
-            for (i = 0; i < 100; i++) {
-                if (i == 99) {
-                    //script failed after 10 seconds; just show the normal page
-                    document.body.style.visibility = "visible";
-                }
+            //used to be an elegant solution here but it wasn't working on mobile :(
+            let interval = 400;
+            setTimeout(function() {
                 try {
-                    setTimeout(function() {
-                        var vid;
-                        vid = document.getElementsByClassName("video media")[0];
-                        document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
-                        document.body.style.visibility = "visible";
-                        i = 10;
-                    }, 100);
-                } catch (TypeError) {
-                    continue;
+                    replacegfy();
                 }
-            }
+                //next just keep going for many times
+                catch (TypeError) {
+                    setTimeout(function() {
+                        try {
+                            replacegfy();
+                        }
+                        catch (TypeError) {
+                            setTimeout(function() {
+                                try {
+                                    replacegfy();
+                                }
+                                catch (TypeError) {
+                                    setTimeout(function() {
+                                        try {
+                                            replacegfy();
+                                        }
+                                        catch (TypeError) {
+                                            setTimeout(function() {
+                                                try {
+                                                    replacegfy();
+                                                }
+                                                catch (TypeError) {
+                                                    setTimeout(function() {
+                                                        try {
+                                                            replacegfy();
+                                                        } catch (TypeError) { //just give up lol
+                                                            document.body.style.visibility = "visible";
+                                                        }
+                                                    }, interval);
+                                                }
+                                            }, interval);
+                                        }
+                                    }, interval);
+                                }
+                            }, interval);
+                        }
+                    }, interval);
+                }
+            }, interval);
+
         }
     } else {
         document.body.style.visibility = "visible";
     }
 };
+
+function replacegfy() {
+    var vid;
+    vid = document.getElementsByClassName("video media")[0];
+    document.body.innerHTML = "<div class=\"container\"><video controls loop muted autoplay>" + vid.innerHTML + "</video></div>";
+    document.body.style.visibility = "visible";
+}
